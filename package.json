@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && gh-pages -d build -u jfinustech"
+    "deploy": "npm run build && gh-pages -d build -u jfinustech <jfinustech@gmail.com>"
   },
   "eslintConfig": {
     "extends": [
