@@ -1,12 +1,12 @@
-import { Routes, Route } from "react-router-dom";
-import List from "./components/list";
+import { Routes, Route } from 'react-router-dom'
+import Main from './components/Main'
 
 function App() {
     return (
         <Routes>
-            <Route index element={<List />} />
+            <Route path="/" element={<Main />} />
         </Routes>
-    );
+    )
 }
 
-export default App;
+export default App

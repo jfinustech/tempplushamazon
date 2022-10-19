@@ -6,6 +6,24 @@
     box-shadow: none !important;
 }
 
+.input-group .form-control {
+    border-right: 0px !important;
+}
+.input-group .btn {
+    border: 1px solid #ced4da;
+    border-left: 0px !important;
+}
+.input-group .btn:hover {
+    color: var(--bs-primary);
+}
+
+.input-group .form-control:focus {
+    border-color: var(--bs-primary);
+}
+.input-group .form-control:focus ~ button {
+    border-color: var(--bs-primary);
+}
+
 .user-select-none {
     user-select: none !important;
 }

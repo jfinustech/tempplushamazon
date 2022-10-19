@@ -1,109 +1,95 @@
-import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import axios from "axios";
-import Colors from "./Colors";
-import Pager from "./Pager";
-import Loading from "./Loading";
+import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import axios from 'axios'
+import Colors from './Colors'
+import Pagination from './Pagination'
+import Loading from './Loading'
+import Search from './Search'
+import Nav from './Nav'
 
-const List = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [response, setResponse] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [hasError, setHasError] = useState(true);
-    const [error, setError] = useState("testing");
-    const [init, setInit] = useState(true);
+const Main = () => {
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [response, setResponse] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [hasError, setHasError] = useState(true)
+    const [error, setError] = useState('testing')
+    const [init, setInit] = useState(true)
+    const [searchvalue, setSearchvalue] = useState(
+        searchParams.get('search') ?? ''
+    )
 
-    const handleQuery = (q) => {
+    const handleQuery = q => {
         const new_query = {
             ...Object.fromEntries(searchParams.entries()),
             ...q,
-        };
-        setSearchParams(new_query);
-    };
-
-    const handleScroll = () => {
-        // setTimeout(() => {
-        window.scroll(0, 0);
-        // }, 100);
-    };
+        }
+        setSearchParams(new_query)
+    }
 
     useEffect(() => {
-        setLoading(true);
+        setLoading(true)
         const ax = () => {
             axios({
-                method: "post",
-                url: "https://sandbx.rugpal.com/office/jay/d.asp",
+                method: 'post',
+                url: 'https://sandbx.rugpal.com/office/jay/d.asp',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 params: {
-                    page: searchParams.get("page") ?? 1,
-                    newcoll: searchParams.get("newcoll") ?? "",
-                    oldcoll: searchParams.get("oldcoll") ?? "",
+                    page: searchParams.get('page') ?? 1,
+                    newcoll: searchParams.get('newcoll') ?? '',
+                    oldcoll: searchParams.get('oldcoll') ?? '',
+                    search: searchParams.get('search') ?? '',
                 },
             })
                 .then(function (res) {
                     try {
-                        setResponse(res);
-                        handleScroll();
-                        setHasError(false);
+                        setResponse(res)
+                        setHasError(false)
                     } catch (error) {
-                        setHasError(true);
-                        setError(error.message);
+                        setHasError(true)
+                        setError(error.message)
                         // console.log(error);
                     } finally {
-                        setInit(false);
-                        setLoading(false);
+                        setInit(false)
+                        setLoading(false)
                     }
                 })
-                .catch((error) => {
-                    setInit(false);
-                    setLoading(false);
-                    setHasError(true);
-                    setError(error.message);
-                });
-        };
-        ax();
-    }, [searchParams]);
+                .catch(error => {
+                    setInit(false)
+                    setLoading(false)
+                    setHasError(true)
+                    setError(error.message)
+                })
+        }
+        ax()
+    }, [searchParams])
 
     return (
         <>
-            {/* {loading && <Loading />} */}
+            {(init || loading) && <Loading />}
             <div className="App">
-                <div className="containerr px-3 px-md-5">
-                    <div className="row">
-                        <div className="col-12">
-                            <header className="my-3 d-flex justify-content-between">
-                                <h4 className="m-0 p-0">
-                                    Plush/Amazon Products
-                                </h4>
-                                <h4 className="m-0 p-0">
-                                    <span className="text-muted fw-light">
-                                        Page:{" "}
-                                    </span>{" "}
-                                    {searchParams.get("page") ?? 1}
-                                </h4>
-                            </header>
-                        </div>
-                    </div>
-                </div>
+                <Nav searchParams={searchParams} />
                 <hr className="mt-0 mb-4" />
-
+                <Search
+                    searchvalue={searchvalue}
+                    setSearchvalue={setSearchvalue}
+                />
                 <div
                     className={`containerr px-3 px-md-5 mb-5 ${
-                        loading || init ? "isloading" : ""
+                        loading || init ? 'isloading' : ''
                     }`}
                 >
                     <div className="row g-0">
                         {init || loading ? (
-                            // <div>Loading ....</div>
-                            <Loading />
-                        ) : hasError ? (
+                            <div>Please Wait ....</div>
+                        ) : // <Loading />
+                        hasError ? (
                             <div className="alert alert-danger" role="alert">
                                 {error}
                             </div>
                         ) : response?.data ? (
-                            response?.data?.map((data) => (
+                            response?.data?.map(data => (
                                 <React.Fragment key={data.key.toString()}>
                                     <div className="col-12">
                                         <div className="row g-0">
@@ -155,8 +141,8 @@ const List = () => {
                                                                         </td>
                                                                         <td>
                                                                             {data.new_collection_name ===
-                                                                            ""
-                                                                                ? "N/A"
+                                                                            ''
+                                                                                ? 'N/A'
                                                                                 : data.new_collection_name}
                                                                         </td>
                                                                         {/* <td>
@@ -186,8 +172,8 @@ const List = () => {
                                                             </div>
                                                             <div>
                                                                 {data.new_description ===
-                                                                ""
-                                                                    ? "N/A"
+                                                                ''
+                                                                    ? 'N/A'
                                                                     : data.new_description}
                                                             </div>
                                                         </small>
@@ -214,8 +200,8 @@ const List = () => {
                         )}
                     </div>
                     {!init && !loading && (
-                        <Pager
-                            current_page={searchParams.get("page") ?? 1}
+                        <Pagination
+                            current_page={searchParams.get('page') ?? 1}
                             loading={loading}
                             handleQuery={handleQuery}
                             maxpage={
@@ -228,7 +214,7 @@ const List = () => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default List;
+export default Main

@@ -1,19 +1,25 @@
-const Pager = ({ loading, current_page, maxpage, handleQuery }) => {
-    const handleInput = (e) => {
-        handleQuery({
-            page:
-                e.target.value < 1
-                    ? 1
-                    : e.target.value > maxpage
-                    ? maxpage
-                    : e.target.value,
-        });
-        // setTimeout(() => {
-        //     console.log(e.target.value);
-        // }, 150);
+import { useState } from 'react'
 
-        // return () => clearTimeout(timeout);
-    };
+const Pagination = ({ loading, current_page, maxpage, handleQuery }) => {
+    const [inputval, setInputval] = useState(
+        current_page === '' ? 1 : current_page
+    )
+
+    const handleInput = (e) => {
+        setInputval(e.target.value)
+        const timeout = setTimeout(() => {
+            handleQuery({
+                page:
+                    e.target.value < 1
+                        ? 1
+                        : e.target.value > maxpage
+                        ? maxpage
+                        : e.target.value,
+            })
+        }, 250)
+
+        return () => clearTimeout(timeout)
+    }
 
     return (
         <>
@@ -47,7 +53,7 @@ const Pager = ({ loading, current_page, maxpage, handleQuery }) => {
                                 type="number"
                                 step="1"
                                 min="1"
-                                value={current_page}
+                                value={inputval}
                                 onChange={(e) => handleInput(e)}
                                 disabled={loading}
                             />
@@ -71,11 +77,14 @@ const Pager = ({ loading, current_page, maxpage, handleQuery }) => {
                                 <i className="bi-chevron-right"></i>
                             </button>
                         </div>
+                        <div className="d-block">
+                            <small>Max Page: {maxpage}</small>
+                        </div>
                     </div>
                 </div>
             )}
         </>
-    );
-};
+    )
+}
 
-export default Pager;
+export default Pagination

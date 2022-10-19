@@ -1,12 +1,12 @@
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom'
 
-const Filters = (handleQuery) => {
-    const [searchParams] = useSearchParams();
+const Filters = handleQuery => {
+    const [searchParams] = useSearchParams()
 
-    const oldcoll = searchParams.get("oldcoll");
-    const newcoll = searchParams.get("newcoll");
+    const oldcoll = searchParams.get('oldcoll')
+    const newcoll = searchParams.get('newcoll')
 
-    if (oldcoll === null && newcoll === null) return null;
+    if (oldcoll === null && newcoll === null) return null
 
     return (
         <>
@@ -35,7 +35,7 @@ const Filters = (handleQuery) => {
             </div>
             <hr />
         </>
-    );
-};
+    )
+}
 
-export default Filters;
+export default Filters
