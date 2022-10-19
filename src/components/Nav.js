@@ -7,7 +7,7 @@ const Nav = ({ searchParams }) => {
                 <div className="col-12">
                     <header className="my-3 d-flex justify-content-between">
                         <Link to="/" className="text-decoration-none text-dark">
-                            <h4 className="m-0 p-0">RP-OS Products</h4>
+                            <h4 className="m-0 p-0">RP-OS Collections</h4>
                         </Link>
                         <h4 className="m-0 p-0">
                             <span className="text-muted fw-light">Page: </span>{' '}
