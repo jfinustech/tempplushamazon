@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tempplushamazon/static/css/main.b06b8a6a.css",
-    "main.js": "/tempplushamazon/static/js/main.b7783162.js",
+    "main.js": "/tempplushamazon/static/js/main.38d4bf9b.js",
     "static/media/bootstrap-icons.woff?": "/tempplushamazon/static/media/bootstrap-icons.e559bf06bc84fd9525e6.woff",
     "static/media/bootstrap-icons.woff2?": "/tempplushamazon/static/media/bootstrap-icons.ea98e12d2d58747f9fc5.woff2",
     "index.html": "/tempplushamazon/index.html",
     "main.b06b8a6a.css.map": "/tempplushamazon/static/css/main.b06b8a6a.css.map",
-    "main.b7783162.js.map": "/tempplushamazon/static/js/main.b7783162.js.map"
+    "main.38d4bf9b.js.map": "/tempplushamazon/static/js/main.38d4bf9b.js.map"
   },
   "entrypoints": [
     "static/css/main.b06b8a6a.css",
-    "static/js/main.b7783162.js"
+    "static/js/main.38d4bf9b.js"
   ]
 }
